@@ -53,4 +53,28 @@ public List<Ticket> getTicketsByStatus(String status) {
 	return ticketRepository.findByStatus(status);
 }
 
+public boolean updateTicketStatus(Long id, String status) {
+	
+  if(ticketRepository.findById(id).isPresent()) {
+	 Ticket ticket = ticketRepository.findById(id).get();
+	 ticket.setStatus(status);
+	  ticketRepository.save(ticket);
+	  return true;
+  }
+  
+  return false;
+
+}
+
+public boolean assignTicketToAgent(Long id, String agent) {
+	 if(ticketRepository.findById(id).isPresent()) {
+		 Ticket ticket = ticketRepository.findById(id).get();
+		 ticket.setAssignedToAgent(agent);
+		  ticketRepository.save(ticket);
+		  return true;
+	  }
+	  
+	  return false;
+}
+
 }

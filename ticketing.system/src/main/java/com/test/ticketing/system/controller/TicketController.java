@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sendgrid.helpers.mail.Mail;
@@ -44,9 +45,19 @@ public class TicketController {
 		return ticketService.addTicket(ticket) ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	@RequestMapping(value = "/edit", method = RequestMethod.PUT)
 	public HttpStatus updateTicket(@RequestBody Ticket ticket) {
 		return ticketService.updateTicket(ticket) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
+	}
+	
+	@RequestMapping(value = "/updateticketstatus", method = RequestMethod.PUT)
+	public HttpStatus updateTicketStatus(@RequestParam Long id, @RequestParam String status) {
+		return ticketService.updateTicketStatus(id,status) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
+	}
+	
+	@RequestMapping(value = "/assigntickettoagent", method = RequestMethod.PUT)
+	public HttpStatus assignTicketToAgent(@RequestParam Long id, @RequestParam String agent) {
+		return ticketService.assignTicketToAgent(id,agent) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
 	}
 
 	@RequestMapping(value = "/ticketsbyagent", method = RequestMethod.GET)

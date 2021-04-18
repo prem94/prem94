@@ -1,14 +1,12 @@
 package com.test.ticketing.system.service;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ChangeTicketStatusService {
 	
 	@Autowired
@@ -19,7 +17,7 @@ public class ChangeTicketStatusService {
 		
 		LocalDate currentDate = LocalDate.now();
 		LocalDate currentDateMinus30Days = currentDate.minusDays(30);
-		
+			
 		System.out.println("currentDate: " + currentDate);
 		System.out.println("currentDateMinus30Days : " + currentDateMinus30Days);
 		
@@ -33,5 +31,4 @@ public class ChangeTicketStatusService {
 		      }
 		});	
 	}
-
 }

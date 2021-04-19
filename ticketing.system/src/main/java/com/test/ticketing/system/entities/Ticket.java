@@ -1,7 +1,6 @@
 package com.test.ticketing.system.entities;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "TICKET")
@@ -39,7 +40,8 @@ private String assignedToAgent;
 @Column(name = "priority")
 private String priority;
 
-@Column(name = "status")
+
+@Column(name = "status",insertable = false,columnDefinition = "varchar(255) default 'open'")
 private String status;
 
 @Column(name = "updated_date")
